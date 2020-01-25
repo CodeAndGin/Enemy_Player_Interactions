@@ -8,6 +8,7 @@ bottom_radius = 0.3
 height = 0.001
 
 [sub_resource type="SpatialMaterial" id=2]
+flags_transparent = true
 albedo_color = Color( 0.286275, 0.286275, 0.286275, 1 )
 
 [node name="Indicator" type="MeshInstance"]
