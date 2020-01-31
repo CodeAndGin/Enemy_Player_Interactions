@@ -41,8 +41,9 @@ func dist_from_prev_frame():
 	return dist_tracker_vec.length()
  
 func move_to(target_pos):
-	path = nav.get_simple_path(global_transform.origin, target_pos)
-	path_ind = 0
+	if turn:
+		path = nav.get_simple_path(global_transform.origin, target_pos)
+		path_ind = 0
 
 func _dist_check(target_pos):
 	if translation.distance_to(target_pos) > move_dist:
@@ -56,4 +57,6 @@ func turn_signal_receiver():
 func turn_over():
 	if dist_tracker_float <= 0 and turn:
 		turn = false
+		path = []
+		path_ind = 0
 		get_parent().get_parent().signal_next_actor()

@@ -8,15 +8,15 @@
 [ext_resource path="res://Camera.gd" type="Script" id=6]
 [ext_resource path="res://Indicator.tscn" type="PackedScene" id=7]
 
-[sub_resource type="SpatialMaterial" id=2]
+[sub_resource type="SpatialMaterial" id=1]
 albedo_color = Color( 0.180392, 0.670588, 0.266667, 1 )
 metallic_specular = 0.0
 
-[sub_resource type="PlaneMesh" id=3]
-material = SubResource( 2 )
+[sub_resource type="PlaneMesh" id=2]
+material = SubResource( 1 )
 size = Vector2( 20, 20 )
 
-[sub_resource type="PhysicsMaterial" id=8]
+[sub_resource type="PhysicsMaterial" id=3]
 bounce = 1.0
 
 [sub_resource type="ConcavePolygonShape" id=4]
@@ -24,12 +24,12 @@ data = PoolVector3Array( 10, 0, 10, -10, 0, 10, 10, 0, -10, -10, 0, 10, -10, 0, 
 
 [sub_resource type="CubeMesh" id=5]
 
-[sub_resource type="ConcavePolygonShape" id=9]
+[sub_resource type="ConcavePolygonShape" id=6]
 data = PoolVector3Array( -1, 1, 1, 1, 1, 1, -1, -1, 1, 1, 1, 1, 1, -1, 1, -1, -1, 1, 1, 1, -1, -1, 1, -1, 1, -1, -1, -1, 1, -1, -1, -1, -1, 1, -1, -1, 1, 1, 1, 1, 1, -1, 1, -1, 1, 1, 1, -1, 1, -1, -1, 1, -1, 1, -1, 1, -1, -1, 1, 1, -1, -1, -1, -1, 1, 1, -1, -1, 1, -1, -1, -1, 1, 1, 1, -1, 1, 1, 1, 1, -1, -1, 1, 1, -1, 1, -1, 1, 1, -1, -1, -1, 1, 1, -1, 1, -1, -1, -1, 1, -1, 1, 1, -1, -1, -1, -1, -1 )
 
-[sub_resource type="Environment" id=6]
+[sub_resource type="Environment" id=7]
 
-[sub_resource type="GIProbeData" id=7]
+[sub_resource type="GIProbeData" id=8]
 bounds = AABB( -10, -9.3403, -10, 20, 18.6806, 20 )
 cell_size = 0.15625
 to_cell_xform = Transform( 6.4, 0, 0, 0, 6.4, 0, 0, 0, 6.4, 64, 59.7779, 64 )
@@ -51,11 +51,11 @@ navmesh = ExtResource( 2 )
 [node name="MeshInstance" type="MeshInstance" parent="TurnOrderManager/Navigation/NavigationMeshInstance"]
 cast_shadow = 0
 use_in_baked_light = true
-mesh = SubResource( 3 )
+mesh = SubResource( 2 )
 material/0 = null
 
 [node name="StaticBody" type="StaticBody" parent="TurnOrderManager/Navigation/NavigationMeshInstance/MeshInstance"]
-physics_material_override = SubResource( 8 )
+physics_material_override = SubResource( 3 )
 
 [node name="CollisionShape" type="CollisionShape" parent="TurnOrderManager/Navigation/NavigationMeshInstance/MeshInstance/StaticBody"]
 shape = SubResource( 4 )
@@ -71,7 +71,7 @@ collision_layer = 2
 collision_mask = 3
 
 [node name="CollisionShape" type="CollisionShape" parent="TurnOrderManager/Navigation/NavigationMeshInstance/MeshInstance2/StaticBody"]
-shape = SubResource( 9 )
+shape = SubResource( 6 )
 
 [node name="Player" parent="TurnOrderManager/Navigation" instance=ExtResource( 3 )]
 transform = Transform( 0.5, 0, 0, 0, -2.18557e-08, -0.5, 0, 0.5, -2.18557e-08, 3, 0.75, 0 )
@@ -81,7 +81,9 @@ transform = Transform( 0.5, 0, 0, 0, -2.18557e-08, -0.5, 0, 0.5, -2.18557e-08, 3
 [node name="NavigationMeshInstance" type="NavigationMeshInstance" parent="TurnOrderManager/Navigation2"]
 navmesh = ExtResource( 4 )
 
-[node name="KinematicBody" parent="TurnOrderManager/Navigation2" instance=ExtResource( 5 )]
+[node name="KinematicBody" parent="TurnOrderManager/Navigation2" groups=[
+"enemy",
+] instance=ExtResource( 5 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 1, 6 )
 
 [node name="Camera" type="Camera" parent="."]
@@ -98,10 +100,10 @@ transform = Transform( -0.173648, 0.564863, 0.806707, 0, -0.819152, 0.573577, 0.
 shadow_enabled = true
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource( 6 )
+environment = SubResource( 7 )
 
 [node name="GIProbe" type="GIProbe" parent="."]
 extents = Vector3( 10, 9.3403, 10 )
-data = SubResource( 7 )
+data = SubResource( 8 )
 [connection signal="enemy_not_under_mouse" from="Camera" to="TurnOrderManager/Navigation2/KinematicBody" method="_on_Camera_enemy_not_under_mouse"]
 [connection signal="enemy_under_mouse" from="Camera" to="TurnOrderManager/Navigation2/KinematicBody" method="_on_Camera_enemy_under_mouse"]

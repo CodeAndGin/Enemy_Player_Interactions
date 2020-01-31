@@ -14,6 +14,8 @@ var position_tracker : Vector3
 var dist_tracker_vec
 var dist_tracker_float
 
+var player_in_range = false
+
 onready var nav = get_parent()
 
 func _ready():
@@ -32,6 +34,8 @@ func _process(delta):
 func control_outline():
 	var outline = $MeshInstance.mesh.surface_get_material(0).get_next_pass()
 	outline.params_grow = mouse_detected
+	if turn:
+		outline.params_grow = turn
 
 func move():
 	if dist_tracker_float > 0 and turn_move_path_found:
@@ -49,6 +53,14 @@ func move_to(target_pos):
 		path = nav.get_simple_path(global_transform.origin, target_pos)
 		path_ind = 0
 		turn_move_path_found = true
+	
+	if (find_player() - get_translation()).length() < 2:
+		path = []
+		path_ind = 0
+		player_in_range = true
+		dist_tracker_float = 0
+	else:
+		player_in_range = false
 
 func attack():
 	pass
