@@ -8,9 +8,14 @@
 
 config_version=4
 
-_global_script_classes=[  ]
+_global_script_classes=[ {
+"base": "NinePatchRect",
+"class": "DialogueBox",
+"language": "GDScript",
+"path": "res://addons/adbox/DialogueBox.gd"
+} ]
 _global_script_class_icons={
-
+"DialogueBox": "res://addons/adbox/icon.png"
 }
 
 [application]
@@ -18,6 +23,15 @@ _global_script_class_icons={
 config/name="Enemy_Player_Interactions"
 run/main_scene="res://Root.tscn"
 config/icon="res://icon.png"
+
+[autoload]
+
+UserData="*res://addons/github-integration/scripts/user_data.gd"
+IconLoaderGithub="*res://addons/github-integration/scripts/IconLoaderGithub.gd"
+
+[editor_plugins]
+
+enabled=PoolStringArray( "adbox", "decals", "github-integration" )
 
 [rendering]
 

@@ -13,6 +13,9 @@ var dist_tracker_float
 
 var turn = false
 
+var target_enemy = null
+var enemy_in_range = false
+
 
 func _ready():
 	add_to_group("player")
@@ -21,6 +24,11 @@ func _ready():
  
 func _physics_process(delta):
 	if turn:
+		
+		if target_enemy != null:
+			check_dist_to_enemy()
+			if enemy_in_range:
+				stop_move_on_enemy_approach(target_enemy)
 		move()
 		position_tracker = get_translation()
 		turn_over()
@@ -34,16 +42,33 @@ func move():
 			else:
 				move_and_slide(move_vec.normalized() * move_speed, Vector3(0, 1, 0))
 		dist_tracker_float -= dist_from_prev_frame()
+		
+func check_dist_to_enemy():
+	if (target_enemy.get_translation() - get_translation()).length() < 2:
+		enemy_in_range = true
+	else:
+		enemy_in_range = false
 
+func stop_move_on_enemy_approach(enemy):
+	if (enemy.get_translation() - get_translation()).length() < 2:
+		path = []
+		path_ind = 0
 
 func dist_from_prev_frame():
 	dist_tracker_vec = position_tracker - get_translation()
 	return dist_tracker_vec.length()
  
 func move_to(target_pos):
+	target_enemy = null
 	if turn:
 		path = nav.get_simple_path(global_transform.origin, target_pos)
 		path_ind = 0
+
+func move_to_enemy(enemy):
+	if turn:
+		path = nav.get_simple_path(global_transform.origin, enemy.get_translation())
+		path_ind = 0
+		target_enemy = enemy
 
 func _dist_check(target_pos):
 	if translation.distance_to(target_pos) > move_dist:
@@ -59,4 +84,7 @@ func turn_over():
 		turn = false
 		path = []
 		path_ind = 0
+		target_enemy = null
 		get_parent().get_parent().signal_next_actor()
+
+

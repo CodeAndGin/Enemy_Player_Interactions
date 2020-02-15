@@ -8,7 +8,11 @@ signal enemy_not_under_mouse
  
 func _input(event):
 	if event is InputEventMouseButton and event.pressed and event.button_index == 1:
-		if raycast_mouse_to_world(1):
+		if raycast_mouse_to_world(2):
+			if raycast_mouse_to_world(2).collider.is_in_group("enemy"):
+				if get_node("../TurnOrderManager/Navigation/Player")._dist_check(raycast_mouse_to_world(1).position):
+					get_tree().call_group("player", "move_to_enemy", raycast_mouse_to_world(2).collider)
+		elif raycast_mouse_to_world(1):
 			if get_node("../TurnOrderManager/Navigation/Player")._dist_check(raycast_mouse_to_world(1).position):
 				get_tree().call_group("player", "move_to", raycast_mouse_to_world(1).position)
 
