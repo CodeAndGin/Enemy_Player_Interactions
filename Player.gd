@@ -11,6 +11,11 @@ var position_tracker : Vector3
 var dist_tracker_vec
 var dist_tracker_float
 
+const MAX_HEALTH = 100
+var health
+
+const ATTACK_POWER = 10
+
 var turn = false
 
 var target_enemy = null
@@ -21,14 +26,18 @@ func _ready():
 	add_to_group("player")
 	dist_tracker_float = move_dist
 	position_tracker = get_translation()
+	health = MAX_HEALTH
  
 func _physics_process(delta):
 	if turn:
-		
 		if target_enemy != null:
-			check_dist_to_enemy()
-			if enemy_in_range:
-				stop_move_on_enemy_approach(target_enemy)
+			if target_enemy.get_ref():
+				check_dist_to_enemy()
+				if enemy_in_range:
+					stop_move_on_enemy_approach(target_enemy)
+			else:
+				enemy_in_range = false
+		
 		move()
 		position_tracker = get_translation()
 		turn_over()
@@ -44,15 +53,18 @@ func move():
 		dist_tracker_float -= dist_from_prev_frame()
 		
 func check_dist_to_enemy():
-	if (target_enemy.get_translation() - get_translation()).length() < 2:
+	if (target_enemy.get_ref().get_translation() - get_translation()).length() < 2:
 		enemy_in_range = true
 	else:
 		enemy_in_range = false
 
 func stop_move_on_enemy_approach(enemy):
-	if (enemy.get_translation() - get_translation()).length() < 2:
+	if (enemy.get_ref().get_translation() - get_translation()).length() < 2:
 		path = []
 		path_ind = 0
+
+func detarget_enemy():
+	target_enemy = null
 
 func dist_from_prev_frame():
 	dist_tracker_vec = position_tracker - get_translation()
@@ -66,9 +78,17 @@ func move_to(target_pos):
 
 func move_to_enemy(enemy):
 	if turn:
+		if enemy_in_range:
+			attack_target(enemy)
+			dist_tracker_float -= 2
+			pass
 		path = nav.get_simple_path(global_transform.origin, enemy.get_translation())
 		path_ind = 0
-		target_enemy = enemy
+		target_enemy = weakref(enemy)
+
+func attack_target(enemy):
+	var damage = rand_range(ATTACK_POWER*0.9, ATTACK_POWER*1.1)
+	enemy.take_hit(damage)
 
 func _dist_check(target_pos):
 	if translation.distance_to(target_pos) > move_dist:

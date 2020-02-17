@@ -16,12 +16,19 @@ var dist_tracker_float
 
 var player_in_range = false
 
+var MAX_HEALTH = 20
+var health
+var defence = 3
+
 onready var nav = get_parent()
+
+signal death
 
 func _ready():
 	add_to_group("enemy")
 	dist_tracker_float = move_dist
 	position_tracker = get_translation()
+	health = MAX_HEALTH
 
 func _process(delta):
 	control_outline()
@@ -62,8 +69,20 @@ func move_to(target_pos):
 	else:
 		player_in_range = false
 
-func attack():
-	pass
+func take_hit(damage):
+	var damage_reduction = rand_range(defence*0.9, defence*1.1)
+	take_damage(damage - damage_reduction)
+
+func take_damage(damage):
+	if damage > 0:
+		health -= damage
+	if health <= 0:
+		death()
+
+func death():
+	get_tree().get_nodes_in_group("player")[0].detarget_enemy()
+	emit_signal("death")
+	queue_free()
 
 func find_player():
 	var player = get_tree().get_nodes_in_group("player")

@@ -1,0 +1,13 @@
+[remap]
+
+importer="image"
+type="Image"
+path="res://.import/prototype_512x512_blue1.png-2b7e8b0b97ea5a1e602a8f0d318840fc.image"
+
+[deps]
+
+source_file="res://Assets/Gridbox Prototype Materials/Resources/Textures/Prototype Grid/prototype_512x512_blue1.png"
+dest_files=[ "res://.import/prototype_512x512_blue1.png-2b7e8b0b97ea5a1e602a8f0d318840fc.image" ]
+
+[params]
+

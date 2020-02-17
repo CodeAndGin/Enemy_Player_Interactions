@@ -34,8 +34,8 @@ data = PoolVector3Array( -1, 1, 1, 1, 1, 1, -1, -1, 1, 1, 1, 1, 1, -1, 1, -1, -1
 shader = ExtResource( 8 )
 shader_param/offset = Vector2( 0, 0 )
 shader_param/scale = Vector2( 1, 1 )
-shader_param/emulate_lighting = null
-shader_param/brightness = null
+shader_param/emulate_lighting = true
+shader_param/brightness = 0.01
 shader_param/decal = ExtResource( 10 )
 
 [sub_resource type="CubeMesh" id=8]
@@ -117,6 +117,10 @@ mesh = SubResource( 8 )
 material/0 = null
 script = ExtResource( 9 )
 decal = ExtResource( 10 )
+uv_offset = Vector2( 0, 0 )
+uv_scale = Vector2( 1, 1 )
+emulate_lighting = true
+brightness = 1.0
 
 [node name="DirectionalLight" type="DirectionalLight" parent="."]
 transform = Transform( -0.173648, 0.564863, 0.806707, 0, -0.819152, 0.573577, 0.984808, 0.0996004, 0.142244, 4, 6, 0 )
@@ -128,5 +132,6 @@ environment = SubResource( 9 )
 [node name="GIProbe" type="GIProbe" parent="."]
 extents = Vector3( 10, 9.3403, 10 )
 data = SubResource( 10 )
+[connection signal="death" from="TurnOrderManager/Navigation2/KinematicBody" to="TurnOrderManager" method="_on_KinematicBody_death"]
 [connection signal="enemy_not_under_mouse" from="Camera" to="TurnOrderManager/Navigation2/KinematicBody" method="_on_Camera_enemy_not_under_mouse"]
 [connection signal="enemy_under_mouse" from="Camera" to="TurnOrderManager/Navigation2/KinematicBody" method="_on_Camera_enemy_under_mouse"]
