@@ -5,6 +5,9 @@ const ray_length = 1000
 signal enemy_under_mouse
 signal enemy_not_under_mouse
 
+signal npc_under_mouse(target)
+signal npc_not_under_mouse
+
  
 func _input(event):
 	if event is InputEventMouseButton and event.pressed and event.button_index == 1:
@@ -20,8 +23,14 @@ func _process(delta):
 	if raycast_mouse_to_world(2):
 		if raycast_mouse_to_world(2).collider.is_in_group("enemy"):
 			emit_signal("enemy_under_mouse")
+		elif raycast_mouse_to_world(2).collider.is_in_group("npc"):
+			emit_signal("npc_under_mouse", raycast_mouse_to_world(2).collider)
+		else:
+			emit_signal("enemy_not_under_mouse")
+			emit_signal("npc_not_under_mouse")
 	else:
 		emit_signal("enemy_not_under_mouse")
+		emit_signal("npc_not_under_mouse")
 	
 	if raycast_mouse_to_world(1):
 		get_node("../Indicator")._move_to_mouse(raycast_mouse_to_world(1).position)
