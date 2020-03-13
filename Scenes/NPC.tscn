@@ -1,26 +1,3 @@
-[gd_scene load_steps=4 format=2]
-
-[ext_resource path="res://Scripts/NPC.gd" type="Script" id=1]
-
-[sub_resource type="CylinderMesh" id=5]
-top_radius = 0.5
-bottom_radius = 0.5
-height = 1.0
-
-[sub_resource type="CylinderShape" id=4]
-radius = 0.5
-height = 1.0
-
-[node name="NPC" type="KinematicBody"]
-collision_layer = 2
-collision_mask = 3
-script = ExtResource( 1 )
-
-[node name="MeshInstance" type="MeshInstance" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0 )
-mesh = SubResource( 5 )
-material/0 = null
-
-[node name="CollisionShape" type="CollisionShape" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0 )
-shape = SubResource( 4 )
+version https://git-lfs.github.com/spec/v1
+oid sha256:8120089e1b87bb663d9237ee6bc0effed6e57b1adb6dc7cfcd91c508f5c25bf6
+size 673

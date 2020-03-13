@@ -1,7 +1,3 @@
-[gd_scene load_steps=2 format=2]
-
-[ext_resource path="res://Scripts/TurnOrderManager.gd" type="Script" id=1]
-
-
-[node name="TurnOrderManager" type="Spatial"]
-script = ExtResource( 1 )
+version https://git-lfs.github.com/spec/v1
+oid sha256:8e7bcd86c251687b4ebcbe60135142cd604d3d248ca3591618c300bcc998c393
+size 183
