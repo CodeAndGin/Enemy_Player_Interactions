@@ -23,7 +23,7 @@ func next_turn_iter():
 
 func signal_next_actor():
 	list_of_actors[current_actor].get_ref().turn_signal_receiver()
-	print(current_actor)
+#	print(current_actor)
 	next_turn_iter()
 
 func sort_actors():
@@ -38,7 +38,7 @@ func reset_actor_list():
 		list2.append(weakref(actor))
 	list_of_actors = list2
 	current_actor = list_of_actors.find(actor_ref)
-	print(list_of_actors)
+#	print(list_of_actors)
 
 
 func _on_KinematicBody_death():

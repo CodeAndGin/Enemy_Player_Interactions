@@ -1,8 +1,8 @@
 extends KinematicBody
 
-export var mouse_detected = false
+var mouse_detected = false
 
-export var player_in_range = false
+var player_in_range = false
 
 onready var mat = preload("res://Materials/NPC.tres").duplicate(true)
 
@@ -11,7 +11,7 @@ func _ready():
 	$MeshInstance.mesh = $MeshInstance.mesh.duplicate(true)
 	$MeshInstance.mesh.surface_set_material(0, mat)
 	var col = Color(rand_range(0,1),rand_range(0,1),rand_range(0,1))
-	print(col)
+#	print(col)
 	mat.set_albedo(col)
 	#$MeshInstance.mesh.surface_get_material(0).set_albedo(col)
 	
@@ -19,7 +19,7 @@ func _ready():
 
 func _process(delta):
 	control_outline()
-	print(get_name() + " " + str(mouse_detected))
+#	print(get_name() + " " + str(mouse_detected))
 
 func control_outline():
 	var outline = $MeshInstance.mesh.surface_get_material(0).get_next_pass()

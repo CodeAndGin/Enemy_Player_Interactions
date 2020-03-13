@@ -21,17 +21,23 @@ var health
 var defence = 3
 
 onready var nav = get_parent()
+onready var camera = get_node("../Camera")
 
 signal death
 
 func _ready():
 	add_to_group("enemy")
+	$MeshInstance.mesh = $MeshInstance.mesh.duplicate(true)
+	$MeshInstance.mesh.surface_set_material(0, $MeshInstance.mesh.surface_get_material(0).duplicate(true))
 	dist_tracker_float = move_dist
 	position_tracker = get_translation()
 	health = MAX_HEALTH
+	$HealthBar.max_value = MAX_HEALTH
+	$HealthBar.min_value = 0
 
 func _process(delta):
 	control_outline()
+	update_health_bar()
 	if turn:
 		move_to(find_player())
 		move()
@@ -56,7 +62,7 @@ func move():
 
 func move_to(target_pos):
 	if !turn_move_path_found:
-		print("finding path to player: %s" % target_pos)
+#		print("finding path to player: %s" % target_pos)
 		path = nav.get_simple_path(global_transform.origin, target_pos)
 		path_ind = 0
 		turn_move_path_found = true
@@ -78,6 +84,12 @@ func take_damage(damage):
 		health -= damage
 	if health <= 0:
 		death()
+
+func update_health_bar():
+	$HealthBar.value = health
+	$HealthBar.rect_position = get_tree().get_root().get_camera().unproject_position(translation)
+	$HealthBar.rect_position.x -= 55
+	$HealthBar.rect_position.y -= 45
 
 func death():
 	get_tree().get_nodes_in_group("player")[0].detarget_enemy()
@@ -102,8 +114,11 @@ func turn_over():
 		turn_move_path_found = false
 		get_parent().get_parent().signal_next_actor()
 
-func _on_Camera_enemy_under_mouse():
-	mouse_detected = true
+func _on_Camera_enemy_under_mouse(target):
+	if target.get_name() == get_name():
+		mouse_detected = true
+	else:
+		mouse_detected = false
 
 func _on_Camera_enemy_not_under_mouse():
 	mouse_detected = false

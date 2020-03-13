@@ -2,7 +2,7 @@ extends Camera
 
 const ray_length = 1000
 
-signal enemy_under_mouse
+signal enemy_under_mouse(target)
 signal enemy_not_under_mouse
 
 signal npc_under_mouse(target)
@@ -19,10 +19,11 @@ func _input(event):
 			if get_node("../TurnOrderManager/Navigation/Player")._dist_check(raycast_mouse_to_world(1).position):
 				get_tree().call_group("player", "move_to", raycast_mouse_to_world(1).position)
 
+# warning-ignore:unused_argument
 func _process(delta):
 	if raycast_mouse_to_world(2):
 		if raycast_mouse_to_world(2).collider.is_in_group("enemy"):
-			emit_signal("enemy_under_mouse")
+			emit_signal("enemy_under_mouse", raycast_mouse_to_world(2).collider)
 		elif raycast_mouse_to_world(2).collider.is_in_group("npc"):
 			emit_signal("npc_under_mouse", raycast_mouse_to_world(2).collider)
 		else:
