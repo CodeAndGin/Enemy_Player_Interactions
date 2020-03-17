@@ -21,9 +21,10 @@ var health
 var defence = 3
 
 onready var nav = get_parent()
-onready var camera = get_node("../Camera")
+onready var camera = get_tree().get_root().get_camera()
 
-signal death
+signal death(actor)
+
 
 func _ready():
 	add_to_group("enemy")
@@ -93,7 +94,7 @@ func update_health_bar():
 
 func death():
 	get_tree().get_nodes_in_group("player")[0].detarget_enemy()
-	emit_signal("death")
+	emit_signal("death", self)
 	queue_free()
 
 func find_player():
@@ -122,3 +123,7 @@ func _on_Camera_enemy_under_mouse(target):
 
 func _on_Camera_enemy_not_under_mouse():
 	mouse_detected = false
+
+func _on_TurnOrderManager_next_actor(actor):
+	if actor == self:
+		turn_signal_receiver()

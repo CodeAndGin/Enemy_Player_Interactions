@@ -108,3 +108,8 @@ func turn_over():
 		get_parent().get_parent().signal_next_actor()
 
 
+
+
+func _on_TurnOrderManager_next_actor(actor):
+	if actor == self:
+		turn_signal_receiver()
