@@ -31,7 +31,7 @@ IconLoaderGithub="*res://addons/github-integration/scripts/IconLoaderGithub.gd"
 
 [editor_plugins]
 
-enabled=PoolStringArray( "adbox", "decals", "github-integration" )
+enabled=PoolStringArray( "GodotTIE", "adbox", "decals", "github-integration" )
 
 [rendering]
 
