@@ -1,6 +1,8 @@
 extends Control
 
-var text = ["This is some test dialogue", "This is another line of test dialogue"]
+var text = []
+var textreceived = 0
+signal all_text_received
 
 var dialogueIter = 0
 var dialogueSent = false
@@ -14,11 +16,13 @@ func _ready():
 
 func _process(delta):
 	textInterface.set_state(1)
-	dialogueIter %= 2
-	if !dialogueSent:
-		textInterface.buff_text(text[dialogueIter], dialogueSpeed)
-		dialogueSent = true
-		buffEnd = false
+	if text.size() > 0:
+		dialogueIter %= text.size()
+	if text.size() > 0:
+		if !dialogueSent:
+			textInterface.buff_text(text[dialogueIter], dialogueSpeed)
+			dialogueSent = true
+			buffEnd = false
 
 func _input(event):
 	if event is InputEventKey and event.is_pressed():
@@ -31,3 +35,27 @@ func _input(event):
 
 func _on_TextInterfaceEngine_buff_end():
 	buffEnd = true
+
+
+func _on_Player_send_dialogue(_text):
+	text.append(text)
+
+
+func _on_NPC_send_dialogue(_text):
+	text.append(text)
+
+
+func _on_Player_dialogue_received_from_json(array_length):
+	pass
+
+
+func _on_Player_dialogue_amount_sent(a):
+	textreceived += a
+	if textreceived == text.size():
+		emit_signal("all_text_received")
+
+
+func _on_NPC_dialogue_amount_sent(a):
+	textreceived += a
+	if textreceived == text.size():
+		emit_signal("all_text_received")

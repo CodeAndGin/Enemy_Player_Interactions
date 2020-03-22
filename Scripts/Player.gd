@@ -21,6 +21,14 @@ var turn = false
 var target_enemy = null
 var enemy_in_range = false
 
+var dialogue
+var dialogue_iter = 0
+var all_dialogue_received = false
+signal dialogue_received_from_json(array_length)
+signal send_dialogue(text)
+signal dialogue_sent
+signal dialogue_amount_sent(a)
+
 
 func _ready():
 	add_to_group("player")
@@ -107,9 +115,44 @@ func turn_over():
 		target_enemy = null
 		get_parent().get_parent().signal_next_actor()
 
-
+func parse_dialogue():
+	var file = File.new()
+	file.open("res://JSON/testDialogue.json", File.READ)
+	var data = parse_json(file.get_as_text())
+	for actor in data.actors :
+		if actor.name == "player":
+			dialogue = actor.dialogue
+	emit_signal("dialogue_received_from_json", dialogue.size())
+	
+func sending_dialogue():
+	emit_signal("send_dialogue", dialogue[dialogue_iter])
+	dialogue_iter += 1
+#	if dialogue.size() > 0:
+#		dialogue_iter %= dialogue.size()
+#	else:
+#		dialogue_iter = 0
+	emit_signal("dialogue_sent")
 
 
 func _on_TurnOrderManager_next_actor(actor):
 	if actor == self:
 		turn_signal_receiver()
+
+
+func _on_NPC_dialogue_received_from_json(array_length):
+	parse_dialogue()
+
+
+func _on_NPC_dialogue_sent():
+	if dialogue_iter != dialogue.size():
+		all_dialogue_received = false
+		sending_dialogue()
+	elif not all_dialogue_received:
+		emit_signal("dialogue_amount_sent", dialogue.size())
+		emit_signal("dialogue_sent")
+	else:
+		pass
+
+
+func _on_DialogueBox_all_text_received():
+	all_dialogue_received = true

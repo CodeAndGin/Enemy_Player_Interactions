@@ -1,0 +1,16 @@
+{
+    "actors" : [
+        {
+            "name" : "player",
+            "dialogue" : [
+                "Hey there", "Trying to write some dialogue here", "It really is"
+            ]
+        },
+        {
+            "name" : "npc",
+            "dialogue" : [
+                "What's up?", "Ah, now that must be difficult"
+            ]
+        }
+    ]
+}
