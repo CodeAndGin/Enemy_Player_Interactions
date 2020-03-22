@@ -4,13 +4,15 @@
             "name" : "player",
             "dialogue" : [
                 "Hey there", "Trying to write some dialogue here", "It really is"
-            ]
+            ],
+            "indices" : [0,2,4]
         },
         {
             "name" : "npc",
             "dialogue" : [
                 "What's up?", "Ah, now that must be difficult"
-            ]
+            ],
+            "indices" : [1,3]
         }
     ]
 }
