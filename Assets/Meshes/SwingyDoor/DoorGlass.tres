@@ -1,0 +1,8 @@
+[gd_resource type="SpatialMaterial" format=2]
+
+[resource]
+resource_name = "Material.002"
+flags_transparent = true
+params_cull_mode = 2
+albedo_color = Color( 0.141176, 0.141176, 0.141176, 0.623529 )
+roughness = 0.13

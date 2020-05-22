@@ -1,0 +1,57 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://Assets/Meshes/SwingyDoor/M1.tres" type="ArrayMesh" id=1]
+[ext_resource path="res://Assets/Meshes/SwingyDoor/M4.tres" type="ArrayMesh" id=2]
+[ext_resource path="res://Assets/Meshes/SwingyDoor/dooranim.tres" type="Animation" id=3]
+[ext_resource path="res://Assets/Meshes/SwingyDoor/M2.tres" type="ArrayMesh" id=4]
+[ext_resource path="res://Assets/Meshes/SwingyDoor/M3.tres" type="ArrayMesh" id=5]
+
+[sub_resource type="Animation" id=1]
+resource_name = "SwingOpen"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("..:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ), Vector3( 0, 110, 0 ) ]
+}
+
+[node name="Door" type="Spatial"]
+transform = Transform( -0.34202, 0, 0.939693, 0, 1, 0, -0.939693, 0, -0.34202, 0, 0, 0 )
+
+[node name="Meshes" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.35933 )
+
+[node name="Handle" type="MeshInstance" parent="Meshes"]
+transform = Transform( 0.00381426, 0, 0, 0, 0.935134, 0, 0, 0, 0.128037, -0.0821051, 0.382359, -1.0098 )
+use_in_baked_light = true
+mesh = ExtResource( 1 )
+material/0 = null
+
+[node name="Handle1" type="MeshInstance" parent="Meshes"]
+transform = Transform( 0.00381426, 0, 0, 0, 0.935134, 0, 0, 0, 0.128037, 0.076289, 0.382359, -1.0098 )
+use_in_baked_light = true
+mesh = ExtResource( 4 )
+material/0 = null
+
+[node name="Window" type="MeshInstance" parent="Meshes"]
+transform = Transform( 0.03, 0, 0, 0, 2.38, 0, 0, 0, 0.47, 0, 0, -0.31 )
+use_in_baked_light = true
+mesh = ExtResource( 5 )
+material/0 = null
+
+[node name="Doorframe" type="MeshInstance" parent="Meshes"]
+transform = Transform( -1.31134e-07, 1, 0, -3, -4.37114e-08, 0, 0, 0, 1.3, 0, 0, 0 )
+use_in_baked_light = true
+mesh = ExtResource( 2 )
+material/0 = null
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Meshes"]
+anims/SwingClose = ExtResource( 3 )
+anims/SwingOpen = SubResource( 1 )

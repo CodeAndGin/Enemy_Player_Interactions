@@ -1,0 +1,6 @@
+[gd_resource type="SpatialMaterial" format=2]
+
+[resource]
+resource_name = "WinFrame"
+albedo_color = Color( 0.207843, 0.12549, 0.0313726, 1 )
+metallic_specular = 0.56

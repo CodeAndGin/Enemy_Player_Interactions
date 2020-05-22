@@ -21,7 +21,7 @@ _global_script_class_icons={
 [application]
 
 config/name="Enemy_Player_Interactions"
-run/main_scene="res://Scenes/Root.tscn"
+run/main_scene="res://Scenes/Library.tscn"
 config/icon="res://icon.png"
 
 [autoload]

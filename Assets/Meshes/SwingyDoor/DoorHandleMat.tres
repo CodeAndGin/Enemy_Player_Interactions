@@ -1,0 +1,9 @@
+[gd_resource type="SpatialMaterial" format=2]
+
+[resource]
+resource_name = "Material.003"
+params_cull_mode = 2
+albedo_color = Color( 0.5596, 0.5596, 0.5596, 1 )
+metallic = 0.61
+metallic_specular = 0.93
+roughness = 0.47

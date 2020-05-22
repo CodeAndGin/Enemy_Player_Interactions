@@ -1,0 +1,141 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Assets/Meshes/Person/Person.gltf" type="PackedScene" id=1]
+[ext_resource path="res://Materials/Person.material" type="Material" id=2]
+
+[node name="Person" instance=ExtResource( 1 )]
+
+[node name="Bone" parent="Armature" index="0"]
+transform = Transform( 1, 8.88179e-15, 2.38419e-07, -4.01519e-08, 0.985717, 0.168409, -2.35013e-07, -0.168409, 0.985717, 0.0231679, 1.8333, -0.0543601 )
+
+[node name="Bone001" parent="Armature/Bone" index="0"]
+transform = Transform( 1, -1.31244e-08, -2.38057e-07, 9.76996e-15, 0.998484, -0.0550479, 2.38418e-07, 0.0550479, 0.998484, -3.09335e-09, 0.225523, -1.92693e-09 )
+
+[node name="Bone002" parent="Armature/Bone/Bone001" index="0"]
+transform = Transform( 0.999812, -0.019391, 0.00094103, 0.0192875, 0.986617, -0.161912, 0.00221119, 0.161899, 0.986805, -1.1109e-08, 0.361264, 6.22984e-08 )
+
+[node name="Bone003" parent="Armature/Bone/Bone001/Bone002" index="0"]
+transform = Transform( 0.999982, 0.00583385, -0.00155419, -0.00602732, 0.979498, -0.201362, 0.000347608, 0.201368, 0.979516, 4.82733e-09, 0.391731, 3.13782e-08 )
+
+[node name="Bone004" parent="Armature/Bone/Bone001/Bone002/Bone003" index="0"]
+transform = Transform( 0.99992, -0.0119892, 0.00402792, 0.0123135, 0.995536, -0.0935747, -0.00288806, 0.0936168, 0.995604, 1.97838e-09, 0.292805, 3.97158e-08 )
+
+[node name="Head" parent="Armature/Bone/Bone001/Bone002/Bone003/Bone004" index="0"]
+material/0 = ExtResource( 2 )
+
+[node name="Neck" parent="Armature/Bone/Bone001/Bone002/Bone003" index="1"]
+transform = Transform( 0.999533, 0.0298589, -0.00651259, -0.0252147, 0.926148, 0.376317, 0.017268, -0.375977, 0.926468, -0.277387, -1.84051, 0.38202 )
+material/0 = ExtResource( 2 )
+
+[node name="Bone005" parent="Armature/Bone/Bone001/Bone002" index="1"]
+transform = Transform( -0.98508, 0.171448, 0.0151076, -0.171744, -0.984915, -0.0211382, 0.0112557, -0.0234174, 0.999662, 0.32428, 0.288169, -0.0685486 )
+
+[node name="Bone006" parent="Armature/Bone/Bone001/Bone002/Bone005" index="0"]
+transform = Transform( 0.999381, -0.034876, 0.00465041, 0.0342091, 0.93224, -0.36022, 0.00822772, 0.360156, 0.932856, -6.10178e-08, 0.568691, 1.29733e-07 )
+
+[node name="Bone007" parent="Armature/Bone/Bone001/Bone002/Bone005/Bone006" index="0"]
+transform = Transform( 0.990471, 0.136254, -0.0200744, -0.135354, 0.989954, 0.0408664, 0.025441, -0.0377598, 0.998963, -6.02639e-08, 0.42153, 4.17233e-08 )
+
+[node name="LHand" parent="Armature/Bone/Bone001/Bone002/Bone005/Bone006/Bone007" index="0"]
+transform = Transform( -0.971769, -0.0232439, -0.234776, -0.161379, -0.660415, 0.733355, -0.172095, 0.750541, 0.638021, 0.729323, 0.674229, -0.860796 )
+material/0 = ExtResource( 2 )
+
+[node name="LElbow" parent="Armature/Bone/Bone001/Bone002/Bone005/Bone006" index="1"]
+transform = Transform( -0.981043, -0.128082, -0.145413, -0.0352473, -0.619942, 0.783856, -0.190545, 0.774124, 0.603676, 0.83152, 0.955092, -0.866807 )
+material/0 = ExtResource( 2 )
+
+[node name="LForeArm" parent="Armature/Bone/Bone001/Bone002/Bone005/Bone006/LElbow" index="0"]
+material/0 = ExtResource( 2 )
+
+[node name="LShoulder" parent="Armature/Bone/Bone001/Bone002/Bone005" index="1"]
+material/0 = ExtResource( 2 )
+
+[node name="LArm" parent="Armature/Bone/Bone001/Bone002/Bone005/LShoulder" index="0"]
+material/0 = ExtResource( 2 )
+
+[node name="Bone011" parent="Armature/Bone/Bone001/Bone002" index="2"]
+transform = Transform( -0.977697, -0.209465, 0.0149858, 0.209005, -0.977527, -0.0275132, 0.0204119, -0.0237676, 0.999509, -0.310808, 0.298296, -0.0552458 )
+
+[node name="Bone012" parent="Armature/Bone/Bone001/Bone002/Bone011" index="0"]
+transform = Transform( 0.988382, 0.0469294, 0.144565, 0.00864566, 0.93224, -0.361737, -0.151746, 0.358784, 0.921003, 1.53733e-08, 0.56869, 7.81607e-08 )
+
+[node name="Bone013" parent="Armature/Bone/Bone001/Bone002/Bone011/Bone012" index="0"]
+transform = Transform( 0.990596, -0.13083, -0.0400475, 0.132717, 0.989954, 0.0487575, 0.0332662, -0.0536139, 0.998007, -6.80951e-08, 0.42153, -9.13304e-08 )
+
+[node name="RHand" parent="Armature/Bone/Bone001/Bone002/Bone011/Bone012/Bone013" index="0"]
+material/0 = ExtResource( 2 )
+
+[node name="RElbow" parent="Armature/Bone/Bone001/Bone002/Bone011/Bone012" index="1"]
+material/0 = ExtResource( 2 )
+
+[node name="RForeArm" parent="Armature/Bone/Bone001/Bone002/Bone011/Bone012/RElbow" index="0"]
+material/0 = ExtResource( 2 )
+
+[node name="RShoulder" parent="Armature/Bone/Bone001/Bone002/Bone011" index="1"]
+material/0 = ExtResource( 2 )
+
+[node name="RArm" parent="Armature/Bone/Bone001/Bone002/Bone011/RShoulder" index="0"]
+material/0 = ExtResource( 2 )
+
+[node name="Chest" parent="Armature/Bone/Bone001/Bone002" index="3"]
+material/0 = ExtResource( 2 )
+
+[node name="Midriff" parent="Armature/Bone/Bone001" index="1"]
+material/0 = ExtResource( 2 )
+
+[node name="Bone008" parent="Armature/Bone" index="1"]
+transform = Transform( -0.978275, 0.205916, -0.0237623, -0.20355, -0.975992, -0.0775024, -0.0391506, -0.0709823, 0.996708, 0.207625, -0.00703273, 0.0148529 )
+
+[node name="Bone009" parent="Armature/Bone/Bone008" index="0"]
+transform = Transform( 0.977706, 0.209951, 0.00325885, -0.208607, 0.96944, 0.129108, 0.0239471, -0.126909, 0.991625, 7.10985e-08, 0.737781, -1.99619e-08 )
+
+[node name="Bone010" parent="Armature/Bone/Bone008/Bone009" index="0"]
+transform = Transform( 0.999682, -0.0252017, -0.000601538, 0.00501871, 0.22235, -0.974954, 0.0247042, 0.974641, 0.222406, -1.52001e-08, 0.732373, -1.54166e-10 )
+
+[node name="LAnkle" parent="Armature/Bone/Bone008/Bone009/Bone010" index="0"]
+material/0 = ExtResource( 2 )
+
+[node name="LFoot" parent="Armature/Bone/Bone008/Bone009/Bone010" index="1"]
+material/0 = ExtResource( 2 )
+
+[node name="LKnee" parent="Armature/Bone/Bone008/Bone009" index="1"]
+material/0 = ExtResource( 2 )
+
+[node name="LLLeg" parent="Armature/Bone/Bone008/Bone009" index="2"]
+material/0 = ExtResource( 2 )
+
+[node name="LHipJoint" parent="Armature/Bone/Bone008" index="1"]
+material/0 = ExtResource( 2 )
+
+[node name="LULeg" parent="Armature/Bone/Bone008" index="2"]
+material/0 = ExtResource( 2 )
+
+[node name="Bone014" parent="Armature/Bone" index="2"]
+transform = Transform( -0.977893, -0.207868, -0.0226525, 0.208887, -0.976028, -0.0611293, -0.00940257, -0.0645098, 0.997873, -0.221164, -0.0104772, 0.0256284 )
+
+[node name="Bone015" parent="Armature/Bone/Bone014" index="0"]
+transform = Transform( 0.983018, -0.181783, -0.0251078, 0.183474, 0.976275, 0.115, 0.00360698, -0.117654, 0.993048, 3.14321e-08, 0.7535, -8.3819e-09 )
+
+[node name="Bone016" parent="Armature/Bone/Bone014/Bone015" index="0"]
+transform = Transform( 0.815653, -0.119654, 0.566032, 0.574436, 0.283836, -0.767763, -0.068795, 0.951378, 0.300245, 4.97115e-09, 0.71098, -6.56616e-09 )
+
+[node name="RAnkle" parent="Armature/Bone/Bone014/Bone015/Bone016" index="0"]
+material/0 = ExtResource( 2 )
+
+[node name="RFoot" parent="Armature/Bone/Bone014/Bone015/Bone016" index="1"]
+material/0 = ExtResource( 2 )
+
+[node name="RKnee" parent="Armature/Bone/Bone014/Bone015" index="1"]
+material/0 = ExtResource( 2 )
+
+[node name="RLLeg" parent="Armature/Bone/Bone014/Bone015/RKnee" index="0"]
+material/0 = ExtResource( 2 )
+
+[node name="RHipJoint" parent="Armature/Bone/Bone014" index="1"]
+material/0 = ExtResource( 2 )
+
+[node name="RULeg" parent="Armature/Bone/Bone014/RHipJoint" index="0"]
+material/0 = ExtResource( 2 )
+
+[node name="Hips" parent="Armature/Bone" index="3"]
+material/0 = ExtResource( 2 )
