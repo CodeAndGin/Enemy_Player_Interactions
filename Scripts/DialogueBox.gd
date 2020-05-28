@@ -11,8 +11,10 @@ var buffEnd = false
 var nameBuffEnd = false
 var nameSent = false
 
-onready var textInterface = $Panel/TextInterfaceEngine
-onready var namesInterface = $Panel/Names
+onready var textInterface = $MarginContainer/Panel/TextInterfaceEngine
+onready var namesInterface = $MarginContainer/Panel/Names
+
+signal text_cleared
 
 func _ready():
 	pass
@@ -23,6 +25,7 @@ func _process(delta):
 	if text.size() == dialogueIter:
 		text.clear()
 		textNames.clear()
+		emit_signal("text_cleared")
 	if text.size() > 0:
 		if !dialogueSent:
 			textInterface.buff_text(text[dialogueIter], dialogueSpeed)

@@ -4,7 +4,8 @@ func _ready():
 	pass
 
 func _physics_process(delta):
-	color_shift_if_dist_is_too_high()
+	#color_shift_if_dist_is_too_high()
+	pass
 
 func _move_to_mouse(_pos):
 	_pos += Vector3(0,0,0)
@@ -15,3 +16,7 @@ func color_shift_if_dist_is_too_high():
 		get_surface_material(0).albedo_color = Color(1,0,0,1) #red
 	else:
 		get_surface_material(0).albedo_color = Color(0,0,1,1) #blue
+
+
+func _on_Camera_mousetrack(target):
+	_move_to_mouse(target)

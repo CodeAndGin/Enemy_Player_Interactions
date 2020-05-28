@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/gui_settings.png-a6d78a2514c6bec149d4ad7b06f0c4e8.stex"
+path="res://.import/Label_Play_hover.png-83fa419709f179ddc12c88b48c467909.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/maujoe.camera_control/screenshots/gui_settings.png"
-dest_files=[ "res://.import/gui_settings.png-a6d78a2514c6bec149d4ad7b06f0c4e8.stex" ]
+source_file="res://Assets/Images/TitleScreen/Label_Play_hover.png"
+dest_files=[ "res://.import/Label_Play_hover.png-83fa419709f179ddc12c88b48c467909.stex" ]
 
 [params]
 
