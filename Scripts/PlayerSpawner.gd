@@ -9,6 +9,8 @@ export var y_offset = 0.0
 
 signal playerspawned
 
+signal scaleoffsetsignal(scale)
+
 func _ready():
 	children = get_children()
 	#Children per scene:
@@ -43,12 +45,21 @@ func _spawn_player(from, to): #TODO signal from scene controller to here
 		"Library":
 			spawn(children[0], "Library")
 
-func spawn(location_node, area): #COURTYARD: SCALE BY 
+func spawn(location_node, area):
 	var p = player.instance()
 	nav.add_child(p)
+	
 	p.translation = location_node.get_translation() + Vector3(0,y_offset,0)
 	#Totally messed up the scale between scenes so this is the fastest way to make it look reasonable
 	p.scale *= scale_offset
 	p.move_speed *= scale_offset
 	p.move_dist *= scale_offset
+	p.rotation = location_node.get_rotation()
+	
+	for npc in get_tree().get_nodes_in_group("npc"):
+		connect("scaleoffsetsignal", npc, "_On_Scale")
+	for door in get_tree().get_nodes_in_group("door"):
+		connect("scaleoffsetsignal", door, "_On_Scale")
+		
+	emit_signal("scaleoffsetsignal", scale_offset)
 	emit_signal("playerspawned")

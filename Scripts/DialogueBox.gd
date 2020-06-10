@@ -10,22 +10,35 @@ var dialogueSpeed = 0.05
 var buffEnd = false
 var nameBuffEnd = false
 var nameSent = false
+var connected_to_player = false
 
-onready var textInterface = $MarginContainer/Panel/TextInterfaceEngine
-onready var namesInterface = $MarginContainer/Panel/Names
+onready var textInterface = $MarginContainer/Panel/MarginContainer2/TextInterfaceEngine
+onready var namesInterface = $MarginContainer/Panel/MarginContainer/Names
 
 signal text_cleared
 
 func _ready():
-	pass
+	visible = false
+	connect_to_player()
+
+func connect_to_player():
+	if connected_to_player == true:
+		return
+	if (get_tree().get_nodes_in_group("player").size() < 1):
+		connected_to_player = false
+	else:
+		connect("text_cleared", get_tree().get_nodes_in_group("player")[0], "_on_DialogueBox_text_cleared")
+		connected_to_player = true
 
 func _process(delta):
+	connect_to_player()
 	textInterface.set_state(1)
 	namesInterface.set_state(1)
 	if text.size() == dialogueIter:
 		text.clear()
 		textNames.clear()
 		emit_signal("text_cleared")
+		visible = false
 	if text.size() > 0:
 		if !dialogueSent:
 			textInterface.buff_text(text[dialogueIter], dialogueSpeed)
@@ -83,6 +96,17 @@ func _on_TextInterfaceEngine_buff_end():
 
 func _on_NPC_conversation(name):
 	parse_dialogue(name)
+	visible = true
 
 func _on_Names_buff_end():
 	nameBuffEnd = true
+
+
+func _on_BookReal_conversation(name):
+	parse_dialogue(name)
+	visible = true
+
+
+func _on_SceneManager_conversation(name):
+	parse_dialogue(name)
+	visible = true

@@ -1,14 +1,7 @@
 [gd_resource type="SpatialMaterial" load_steps=2 format=2]
 
-[sub_resource type="SpatialMaterial" id=1]
-flags_transparent = true
-flags_unshaded = true
-flags_do_not_receive_shadows = true
-flags_ensure_correct_normals = true
-params_cull_mode = 1
-params_grow = true
-params_grow_amount = 0.05
+[ext_resource path="res://Materials/Outline.material" type="Material" id=1]
 
 [resource]
-next_pass = SubResource( 1 )
+next_pass = ExtResource( 1 )
 albedo_color = Color( 0.541176, 0.980392, 0.658824, 1 )

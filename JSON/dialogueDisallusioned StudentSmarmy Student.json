@@ -1,0 +1,1 @@
+{"actors": [{"name": "Disallusioned Student", "dialogue": ["How'd you get up here then?", "I'm sure you'll have as much fun getting down as you did getting up"], "indices": [0, 2]}, {"name": "Smarmy Student", "dialogue": ["Yeah, the nav mesh on the stairs is clearly broken, and the designer was too lazy to fix the mesh!", "Bye!"], "indices": [1, 3]}]}

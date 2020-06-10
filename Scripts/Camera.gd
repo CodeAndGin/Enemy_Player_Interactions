@@ -20,6 +20,10 @@ signal arrow_under_mouse(target)
 signal arrow_not_under_mouse
 signal arrowclicked(target)
 
+signal book_under_mouse(target)
+signal book_not_under_mouse
+signal bookclicked(target)
+
 export(Vector3) var offset_from_player = Vector3(0,0,0)
  
 func _input(event):
@@ -37,10 +41,15 @@ func _input(event):
 			elif raycast_mouse_to_world(2).collider.is_in_group("npc"):
 				emit_signal("npc_clicked", raycast_mouse_to_world(2).collider)
 			#clicking for movement
+		elif raycast_mouse_to_world(6):
+			print("bookclicked")
+			
+			emit_signal("bookclicked", raycast_mouse_to_world(6).collider)
 		elif raycast_mouse_to_world(1):
 			emit_signal("moveclick", raycast_mouse_to_world(1).position)
 #			if get_node("../TurnOrderManager/Navigation/Player")._dist_check(raycast_mouse_to_world(1).position):
 #				get_tree().call_group("player", "move_to", raycast_mouse_to_world(1).position)
+		
 
 # warning-ignore:unused_argument
 func _process(delta):
@@ -54,7 +63,10 @@ func _process(delta):
 			emit_signal("npc_not_under_mouse")
 	elif raycast_mouse_to_world(20):
 		emit_signal("arrow_under_mouse", raycast_mouse_to_world(20).collider)
+	elif raycast_mouse_to_world(6):
+		emit_signal("book_under_mouse", raycast_mouse_to_world(6).collider)
 	else:
+		emit_signal("book_not_under_mouse")
 		emit_signal("arrow_not_under_mouse")
 		emit_signal("enemy_not_under_mouse")
 		emit_signal("npc_not_under_mouse")
@@ -81,9 +93,8 @@ func _on_TurnOrderManager_next_actor(actor):
 	turn_actor = actor.get_name()
 
 
-
-
 func _on_PlayerSpawner_playerspawned():
 	var p = get_tree().get_nodes_in_group("player")[0]
 	connect("moveclick", p, "_on_Camera_moveclick")
 	connect("npc_clicked", p, "_on_Camera_npc_clicked")
+	connect("bookclicked", p, "book_clicked")
